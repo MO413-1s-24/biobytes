@@ -16,3 +16,5 @@ O presente projeto foi originado no contexto das atividades da disciplina de pó
 
 # Descrição Resumida do Projeto
 > Descrição do tema do projeto, incluindo motivação e contexto gerador.
+
+O projeto visa aplicar métodos de ciência de redes para analisar genes diferencialmente expressos em pacientes com epilepsia e diagnóstico de Displasia Cortical Focal (DCF) do tipo 2b. A motivação é entender melhor as bases genéticas e as vias moleculares envolvidas na epilepsia associada à DCF. Com técnicas de ciência de redes, como análise de enriquecimento funcional, centralidade e detecção de comunidades, busca-se identificar genes-chave, funções biológicas relevantes e módulos desregulados na rede genética da epilepsia. Isso pode fornecer insights para o desenvolvimento de tratamentos mais direcionados e compreensão dos mecanismos subjacentes à doença.
