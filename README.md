@@ -1,5 +1,5 @@
-# Projeto `<Título do Projeto>`
-# Project `<Title in English>`
+# Projeto `Ciência de Redes aplicada a Epilepsia`
+# Project `Network Science applied to Epilepsy`
 
 |Nome  | RA | Especialização|
 |--|--|--|
