@@ -42,10 +42,6 @@ Base de Dados | Endereço na Web | Resumo descritivo
 Transcriptomes distinguish human FCD subtypes | https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE128300 | 	Metilomas e transcriptomas do DNA gerados a partir de sequenciamento paralelo maciço em 15 espécimes cirúrgicos de DCF, combinados com 5 controles de epilepsia e 8 controles de não epilepsia.
 Gene Ontology | https://geneontology.org/ | Maior fonte de informações do mundo sobre as funções dos genes. 
 
-> [todo] Modelo lógico da base de grafos que será construída. Para o modelo de grafos de propriedades, utilize este
-> [modelo de base](https://docs.google.com/presentation/d/10RN7bDKUka_Ro2_41WyEE76Wxm4AioiJOrsh6BRY3Kk/edit?usp=sharing) para construir o seu.
-> Coloque a imagem do PNG do seu modelo lógico como ilustrado abaixo (a imagem estará na pasta `image`):
->
 > ![Modelo Lógico de Grafos](assets/logical_model.png)
 
 # Metodologia
