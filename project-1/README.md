@@ -46,7 +46,7 @@ Gene Ontology | https://geneontology.org/ | Maior fonte de informações do mund
 > [modelo de base](https://docs.google.com/presentation/d/10RN7bDKUka_Ro2_41WyEE76Wxm4AioiJOrsh6BRY3Kk/edit?usp=sharing) para construir o seu.
 > Coloque a imagem do PNG do seu modelo lógico como ilustrado abaixo (a imagem estará na pasta `image`):
 >
-> ![Modelo Lógico de Grafos](assets/modelo-logico-grafos.png)
+> ![Modelo Lógico de Grafos](assets/logical_model.png)
 
 # Metodologia
 Para analisar a expressão gênica diferencial, utilizaremos métodos estatísticos do DESeq2. Esta ferramenta permite modelar a contagem de leituras usando uma distribuição negativa binomial e realiza testes de hipótese para determinar genes com expressão significativamente diferente entre as condições.
