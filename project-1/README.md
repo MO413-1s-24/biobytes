@@ -42,6 +42,7 @@ Base de Dados | Endereço na Web | Resumo descritivo
 Transcriptomes distinguish human FCD subtypes | https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE128300 | 	Metilomas e transcriptomas do DNA gerados a partir de sequenciamento paralelo maciço em 15 espécimes cirúrgicos de DCF, combinados com 5 controles de epilepsia e 8 controles de não epilepsia.
 Gene Ontology | https://geneontology.org/ | Maior fonte de informações do mundo sobre as funções dos genes. 
 
+# Modelo Lógico
 > ![Modelo Lógico de Grafos](assets/logical_model.png)
 
 # Metodologia
