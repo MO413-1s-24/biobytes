@@ -7,7 +7,7 @@
 | Isabella Cotta Galvão | 199200  | Biologia|
 | João Paulo Francisco da Silva  | 263792  | Computação |
 | Laíz Luiza Miranda de Oliveira | 200744  | Biologia |
-| Nina da Hora | 272499  | Computação |
+| Ana Carolina da Hora | 272499  | Computação |
 | Vitoria Dias Moreira Pinho | 188511  | Computação |
 
 # Apresentação
