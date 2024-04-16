@@ -54,6 +54,12 @@ Utilizando técnicas de ciência de dados, será possível explorar ainda mais a
 
 Além disso, a **análise de perturbação** e robustez permitirá avaliar como a remoção ou perturbação de genes específicos afeta a estrutura e função da rede. Isso ajudará na identificação de vulnerabilidades na rede de genes da epilepsia, apontando genes ou interações críticas para a estabilidade e funcionamento da rede.
 
+Poderá ser usado:
+
+- Simulações de Monte Carlo ou métodos de bootstrapping para estimar o poder estatístico e ajustar o tamanho da amostra conforme necessário.
+
+- Realizar análises de enriquecimento considerando caminhos específicos da doença, como mTORpathies em epilepsias, e use ferramentas de visualização como o Cytoscape para melhor interpretação dos dados.
+
 # Ferramentas
 
 Neste trabalho, utilizaremos as seguintes ferramentas:
