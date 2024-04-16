@@ -50,15 +50,15 @@ Para analisar a expressão gênica diferencial, utilizaremos métodos estatísti
 
 Com os genes diferencialmente expressos identificados, criaremos uma rede de interações. Esta rede permitirá visualizar e analisar as relações entre os genes, bem como suas funções biológicas associadas. Ao integrar a rede com informações de anotação funcional, como a *Gene Ontology*, será possível relacionar os genes com as suas respectivas funções biológicas e vias de sinalização que estão envolvidas, resultando em uma **análise de enriquencimento funcional**.
 
-Utilizando técnicas de ciência de dados, será possível explorar ainda mais a organização e a dinâmica dos genes na rede. A **análise de centralidade** possibilitará a identificação de genes centrais (“hubs”) que desempenham papéis importantes no funcionamento da epilepsia, sendo potenciais alvos para tratamento. A **detecção de comunidades** revelará grupos de genes que interagem entre si de forma mais intensa que com outros, identificando módulos desregulados que podem estar associados à epilepsia e fornecendo informações sobre as funções biológicas destes módulos.
+Utilizando outras técnicas de ciência de redes, será possível explorar ainda mais a organização e a dinâmica dos genes na rede. A **análise de centralidade** possibilitará a identificação de genes centrais (“hubs”) que desempenham papéis importantes no funcionamento da epilepsia, sendo potenciais alvos para tratamento. A **detecção de comunidades** revelará grupos de genes que interagem entre si de forma mais intensa que com outros, identificando módulos desregulados que podem estar associados à epilepsia e fornecendo informações sobre as funções biológicas destes módulos.
 
-Além disso, a **análise de perturbação** e robustez permitirá avaliar como a remoção ou perturbação de genes específicos afeta a estrutura e função da rede. Isso ajudará na identificação de vulnerabilidades na rede de genes da epilepsia, apontando genes ou interações críticas para a estabilidade e funcionamento da rede.
+Além disso, a **análise de perturbação e robustez** permitirá avaliar como a remoção ou perturbação de genes específicos afeta a estrutura e função da rede. Isso ajudará na identificação de vulnerabilidades na rede de genes da epilepsia, apontando genes ou interações críticas para a estabilidade e funcionamento da rede.
 
-Poderá ser usado:
+Estamos em estudo para possivelmente também usarmos:
 
-- Simulações de Monte Carlo ou métodos de bootstrapping para estimar o poder estatístico e ajustar o tamanho da amostra conforme necessário.
+- Simulações de Monte Carlo ou métodos de bootstrapping para estimar o poder estatístico e ajustar o tamanho da amostra conforme necessário;
 
-- Realizar análises de enriquecimento considerando caminhos específicos da doença, como mTORpathies em epilepsias, e use ferramentas de visualização como o Cytoscape para melhor interpretação dos dados.
+- Realizar análises de enriquecimento considerando caminhos específicos da doença, como mTORpatias em epilepsias.
 
 # Ferramentas
 
