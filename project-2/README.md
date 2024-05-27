@@ -51,9 +51,15 @@ Gene Ontology | https://geneontology.org/ | Maior fonte de informações do mund
 > ![Modelo Lógico de Grafos](assets/images/logical_model.png)
 
 # Metodologia
-Para analisar a expressão gênica diferencial, utilizaremos métodos estatísticos do DESeq2. Esta ferramenta permite modelar a contagem de leituras usando uma distribuição negativa binomial e realiza testes de hipótese para determinar genes com expressão significativamente diferente entre as condições.
+Para analisar a expressão gênica diferencial, utilizamos métodos estatísticos do DESeq2. Esta ferramenta permite modelar a contagem de leituras usando uma distribuição negativa binomial e realiza testes de hipótese para determinar genes com expressão significativamente diferente entre as condições.
 
-Com os genes diferencialmente expressos identificados, criaremos uma rede de interações. Esta rede permitirá visualizar e analisar as relações entre os genes, bem como suas funções biológicas associadas. Ao integrar a rede com informações de anotação funcional, como a *Gene Ontology*, será possível relacionar os genes com as suas respectivas funções biológicas e vias de sinalização que estão envolvidas, resultando em uma **análise de enriquencimento funcional**.
+Com os genes diferencialmente expressos identificados, criamos uma rede de interações. Esta rede permite visualizar e analisar as relações entre os genes, bem como suas funções biológicas associadas. Ao integrar a rede com informações de anotação funcional, do *Gene Ontology*, foi possível relacionar os genes com as suas respectivas funções biológicas e vias de sinalização que estão envolvidas, resultando em uma **análise de enriquencimento funcional**:
+
+> ![Modelo Lógico de Grafos](assets/images/functional_network.png)
+
+Utilizamos a Correlação de Pearson nos genes diferencialmente expressos, para criar relações (arestas) entre genes, e filtramos as aretas em que a correlação é maior (p \< 0.05 e statistic \> 0.85):
+
+> ![Modelo Lógico de Grafos](assets/images/pearson_corr_network.png)
 
 Utilizando outras técnicas de ciência de redes, será possível explorar ainda mais a organização e a dinâmica dos genes na rede. A **análise de centralidade** possibilitará a identificação de genes centrais (“hubs”) que desempenham papéis importantes no funcionamento da epilepsia, sendo potenciais alvos para tratamento. A **detecção de comunidades** revelará grupos de genes que interagem entre si de forma mais intensa que com outros, identificando módulos desregulados que podem estar associados à epilepsia e fornecendo informações sobre as funções biológicas destes módulos.
 
@@ -65,11 +71,41 @@ Estamos em estudo para possivelmente também usarmos:
 
 - Realizar análises de enriquecimento considerando caminhos específicos da doença, como mTORpatias em epilepsias.
 
+# Integração entre Bases
+A integração das bases de dados foi feita utilizando a biblioteca Pandas do Python, em que as informações foram filtradas e organizadas em tabelas de arestas e de nós. Nessa etapa, não houveram dificuldades. 
+
+# Análise Preliminar
+Detectamos as principais comunidades da nossa rede utilizando o algoritmo *greedy modularity communities* do NetworkX, detectando 6 comunidades: 
+
+> ![Modelo Lógico de Grafos](assets/images/all_communities.png)
+
+Filtramos apenas os nós de grau maior que 70, restando 3 comunidades:
+
+> ![Modelo Lógico de Grafos](assets/images/communities_filtered.png)
+
+Além disso, filtramos os genes de maior grau de cada comunidade:
+
+> ![Modelo Lógico de Grafos](assets/images/genes_table.png)
+
+# Evolução do Projeto
+
+Nessa entrega realizamos a extração e pós processamento dos dados para geração da rede final. Os passos para geração da rede final, que foram descritos na sessão de metodologia e de base de dados, estão na imagem a seguir:
+
+> ![Modelo Lógico de Grafos](assets/images/workflow.png)
+
+A rede final, gerada através do NetworkX:
+
+> ![Modelo Lógico de Grafos](assets/images/final_network.png)
+
+Tivemos dificuldade com a leitura das nossas tabelas, pelo Cytoscape. Não conseguimos integrar as 4 tabelas (2 tabelas de arestas, e 2 tabelas de nós). Para os próximos projetos, vamos tentar novamente a integração para melhor vizualização. 
+
 # Ferramentas
 
-Neste trabalho, utilizaremos as seguintes ferramentas:
+Neste trabalho, utilizamos as seguintes ferramentas:
 1. **Testes de expressão diferencial (DESeq2)**, para obtenção de genes diferencialmente expressos entre a doença e controles;
 2. **Cytoscape**, para geração de rede de genes diferencialmente expressos e da rede de funções biológicas. Também será utilizado para análises utilizando técnicas de ciência de redes.
+3. **Pandas**: biblioteca do Python utilizada para processamento das tabelas.
+3. **NetworkX**: biblioteca do Python utilizada para filtrar e analisar rede. 
 
 
 # Referências Bibliográficas
