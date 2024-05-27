@@ -5,6 +5,11 @@
 
 A presente proposta de estudo aplica métodos de ciência de redes na análise de genes diferencialmente expressos em pacientes com histórico de epilepsia e diagnóstico de Displasia Cortical Focal (DCF) do tipo 2b. Utilizando técnicas estatísticas, visamos identificar genes com expressão diferencial e construir redes de interações para visualizar relações e funções biológicas. Nessas redes, utilizaremos as seguintes técnicas de ciência de redes: análise de enriquecimento funcional, análise de centralidade, detecção de comunidades e, por último, análise de perturbação e robustez. As análises, utilizando essas técnicas, permitirão explorar genes com papéis importantes na rede, a identificação de possíveis módulos desregulados e vulnerabilidades.
 
+# Slides
+
+[Slides da apresentação do projeto 2](assets/slides/MO413-Projeto2.pdf)
+
+
 # Fundamentação Teórica
 
 A Epilepsia é uma doença causada pela atividade síncrona, excessiva ou anormal das células neuronais no cérebro [1]. O relatório oficial [2] da Liga Internacional Contra a Epilepsia (ILAE) de 2014 define esta doença através de qualquer uma das seguintes opções:
@@ -43,7 +48,7 @@ Transcriptomes distinguish human FCD subtypes | https://www.ncbi.nlm.nih.gov/geo
 Gene Ontology | https://geneontology.org/ | Maior fonte de informações do mundo sobre as funções dos genes. 
 
 # Modelo Lógico
-> ![Modelo Lógico de Grafos](assets/logical_model.png)
+> ![Modelo Lógico de Grafos](assets/images/logical_model.png)
 
 # Metodologia
 Para analisar a expressão gênica diferencial, utilizaremos métodos estatísticos do DESeq2. Esta ferramenta permite modelar a contagem de leituras usando uma distribuição negativa binomial e realiza testes de hipótese para determinar genes com expressão significativamente diferente entre as condições.
