@@ -1,0 +1,326 @@
+---
+title: "Differential Expression Analysis with DESeq2"
+author: biobytes
+output: 
+  html_document:
+    code_folding: hide
+    df_print: paged
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+# Setup
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(GenomicFeatures)
+library(edgeR)
+library(grid)
+library(org.Hs.eg.db)
+library(DESeq2)
+library(clusterProfiler)
+library(tidyverse)
+library(readxl)
+library(RColorBrewer)
+library(pheatmap)
+
+```
+
+# Load data 
+
+```{r}
+setwd("/Users/isabellacotta/Library/CloudStorage/GoogleDrive-icottagalvao@gmail.com/My Drive/Doutorado/Disciplinas/MO413 - Ciência de dados e visualização em saúde/ProjetoFinal")
+
+# Read in count matrix 
+counts <- read.delim("data/rsem.merged.gene_counts.tsv") %>% 
+  mutate(gene_id = str_remove(gene_id, "\\..+")) %>% 
+  select(-transcript_id.s.) %>%
+  filter(!duplicated(gene_id)) %>%
+  column_to_rownames("gene_id")
+
+# Map ENSEMBL into symbols
+symb <- clusterProfiler::bitr(rownames(counts), 
+                              fromType = "ENSEMBL", toType = "SYMBOL", 
+                              OrgDb = org.Hs.eg.db)
+counts <- counts[symb$ENSEMBL, ]
+
+
+# Read in metadata
+meta <- read_excel("data/std_meta_Aus.xlsx")
+
+```
+
+
+# Tidy data
+
+```{r, warning = FALSE}
+# Set same names for sample names in the metadata and the count matrix 
+counts <- counts[meta$sample] # same order
+
+meta %>% dplyr::count(diagnosis)
+rownames(meta) <- meta$sample
+counts <- counts[meta$sample]
+#all(colnames(counts) == rownames(meta))
+```
+
+
+# Create DESeq2 Object 
+
+```{r}
+# Create DESeq2 object 
+meta <- meta %>% mutate(diagnosis = str_remove(diagnosis, " |-"),
+                        diagnosis = factor(diagnosis), 
+                        lobe = factor(lobe))
+dds <- DESeqDataSetFromMatrix(countData = round(counts), 
+                              colData = meta, 
+                              design = ~ diagnosis + lobe)
+
+# Prefilter
+keep <- rowSums(counts(dds) >= 10) >= 5
+dds <- dds[keep,]
+```
+
+
+# Differential Expression Test
+
+The design was specified when creating the object. 
+
+```{r}
+dds <- DESeq(dds)
+```
+
+Extract normalized/transformed counts:
+
+```{r}
+setwd("~/Library/CloudStorage/GoogleDrive-icottagalvao@gmail.com/My Drive/Doutorado/Disciplinas/MO413 - Ciência de dados e visualização em saúde/ProjetoFinal")
+
+norm <- counts(dds, normalized = TRUE)
+
+# Export normalized counts 
+write.csv(norm, "results/normalized_counts_DESeq2.csv", row.names = TRUE)
+
+# Transformed variance: - for visualization
+vsd <- vst(dds, blind = FALSE)
+```
+
+
+
+# Results 
+
+## Sample distances 
+
+```{r}
+# Get sample-to-sample distances 
+dist <- dist(t(assay(vsd)))
+
+# Distance matrix 
+sampleDistMatrix <- as.matrix( dist )
+#colnames(sampleDistMatrix) <- NULL
+
+colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+
+annotation_rows = data.frame(
+    diagnosis = vsd$diagnosis
+)
+rownames(annotation_rows) <- row.names(sampleDistMatrix)
+
+pal <- brewer.pal(5, "Set2")
+names(pal) <- levels(vsd$diagnosis)
+
+ann_colors = list(
+  diagnosis = pal
+)
+
+pheatmap(sampleDistMatrix,
+         clustering_distance_rows=dist,
+         clustering_distance_cols=dist,
+         annotation_row = NULL,
+         annotation_col = annotation_rows,
+         show_colnames = F,
+         show_rownames = F,
+         annotation_colors = ann_colors,
+         col=colors,
+         clustering_method = "complete"
+) 
+```
+```{r}
+vsd.sub <- vsd[, vsd$diagnosis %in% c("Control", "FCDIIb")]
+
+# Get sample-to-sample distances 
+dist <- dist(t(assay(vsd.sub)))
+
+# Distance matrix 
+sampleDistMatrix <- as.matrix( dist )
+#colnames(sampleDistMatrix) <- NULL
+
+colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+
+annotation_rows = data.frame(
+    Diagnosis = vsd.sub$diagnosis
+)
+rownames(annotation_rows) <- row.names(sampleDistMatrix)
+
+pal <- brewer.pal(5, "Set2")
+names(pal) <- levels(vsd$diagnosis)
+
+ann_colors = list(
+  Diagnosis = c("Control" = "darkgreen", "FCDIIb" = "orange")
+)
+
+pheatmap(sampleDistMatrix,
+         clustering_distance_rows=dist,
+         clustering_distance_cols=dist,
+         annotation_row = NULL,
+         annotation_col = annotation_rows,
+         show_colnames = F,
+         show_rownames = F,
+         annotation_colors = ann_colors,
+         col=colors,
+         clustering_method = "complete"
+) 
+
+# Export as svg 
+ggsave("results/sample_distance.svg",
+       width = 6, 
+       height = 4, 
+       dpi = 300)
+```
+
+
+## FCD IIb vs. Non-Epileptic Controls
+
+```{r} 
+res <- results(dds, contrast = c("diagnosis", "FCDIIb", "Control"))
+```
+
+All genes: 
+
+```{r}
+summary(res)
+#resultsNames(dds)
+
+res <- res %>%
+  as.data.frame() %>%
+  rownames_to_column("gene") %>% 
+  left_join(symb, by = c("gene" = "ENSEMBL")) %>% 
+  select(gene, SYMBOL, log2FoldChange, pvalue, padj) %>% 
+  mutate(across(c("log2FoldChange", padj), round, digits = 4))
+DT::datatable(res, options = list(ordering = FALSE), filter = "top")
+```
+
+Significant changes (FC > 1.5):
+
+```{r}
+sig <- res %>% 
+  filter(padj < 0.1, abs(log2FoldChange) > log2(1.5)) %>% 
+  arrange(desc(log2FoldChange))
+
+sum(sig$log2FoldChange > 0)
+
+DT::datatable(sig, options = list(ordering = FALSE), filter = "top")
+```
+
+Export list:
+
+```{r}
+setwd("~/Library/CloudStorage/GoogleDrive-icottagalvao@gmail.com/My Drive/Doutorado/Disciplinas/MO413 - Ciência de dados e visualização em saúde/ProjetoFinal")
+
+# All genes with fold changes 
+write.csv(res, "results/all_DEGs_FCDIIbvsControl.csv", row.names = FALSE)
+
+# Significant genes 
+write.csv(sig, "results/significant_DEGs_FCDIIbvsControl.csv", row.names = FALSE)
+
+```
+
+
+### Visualization 
+
+Volcano plot:
+
+```{r}
+# Create new column if up/down regulated 
+res <- res %>% 
+  mutate(Status = case_when(log2FoldChange > log2(1.5) & padj < 0.1 ~ "Up-regulated", log2FoldChange < -log2(1.5) & padj < 0.1 ~ "Down-regulated", TRUE ~ "Not significant"),
+         label = ifelse((padj < 0.1 & abs(log2FoldChange) > 2.5), SYMBOL, "")) 
+
+ggplot(res, aes(x = log2FoldChange, y = -log10(padj), color = Status, label = label)) + 
+  geom_vline(xintercept = c(-log2(1.5), log2(1.5)), col = "gray", linetype = 'dashed') +
+  geom_hline(yintercept = -log10(0.1), col = "gray", linetype = 'dashed') + 
+  geom_point() + 
+  ggrepel::geom_text_repel(size = 2, color = "black")+
+  ylim(0, 5) + 
+  scale_color_manual(values = c("Up-regulated"="red", "Down-regulated"="blue", "Not significant" = "black")) + 
+  theme_classic() 
+
+
+# Export as svg 
+ggsave("results/volcano_plot.svg",
+       width = 6, 
+       height = 4, 
+       dpi = 300)
+```
+
+
+
+
+### Functional Enrichment 
+
+We'll perform Gene Set Enrichment Analysis on Gene Ontology terms. 
+
+```{r}
+fc <- res$log2FoldChange
+names(fc) <- res$SYMBOL
+fc <- sort(fc, decreasing = TRUE)
+  
+ego <- gseGO(geneList = fc, 
+             OrgDb = org.Hs.eg.db,
+             ont = "BP", 
+             keyType = "SYMBOL",
+             eps = 1e-20)
+```
+
+All functions:
+
+```{r}
+# All functions
+funs <- ego@result %>% 
+  as.data.frame %>% 
+  select(Description, NES, core_enrichment) %>% 
+  arrange(desc(NES))
+DT::datatable(funs, options = list(ordering = FALSE), filter = "top")
+```
+
+Simplified:
+
+```{r}
+ego.simp <- clusterProfiler::simplify(ego, cutoff = 0.4)
+funs.simp <- ego.simp@result %>% 
+  as.data.frame %>% 
+  select(Description, NES, core_enrichment) %>% 
+  arrange(desc(NES))
+DT::datatable(funs.simp, options = list(ordering = FALSE))
+```
+
+
+```{r}
+# Export simplified functions table 
+write.csv(funs.simp, 
+          "results/GSEA.simp.csv")
+```
+
+# Reproducibility 
+
+This document was last rendered on: `r Sys.time()`.
+
+<details>
+  <summary>**Session Info**</summary>
+  
+```{r}
+sessionInfo()
+```
+
+</details>
