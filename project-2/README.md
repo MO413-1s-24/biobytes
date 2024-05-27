@@ -44,8 +44,14 @@ Dessa forma, este estudo busca construir redes regulatórias e funcionais a part
 
 Base de Dados | Endereço na Web | Resumo descritivo
 ----- | ----- | -----
-Transcriptomes distinguish human FCD subtypes | https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE128300 | 	Metilomas e transcriptomas do DNA gerados a partir de sequenciamento paralelo maciço em 15 espécimes cirúrgicos de DCF, combinados com 5 controles de epilepsia e 8 controles de não epilepsia.
+Transcriptomes distinguish human FCD subtypes | https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE128300 | 	Transcriptom gerados a partir de sequenciamento paralelo maciço em 15 espécimes cirúrgicos de DCF, combinados com 5 controles de epilepsia e 8 controles de não epilepsia.
 Gene Ontology | https://geneontology.org/ | Maior fonte de informações do mundo sobre as funções dos genes. 
+
+Os dados de RNA-seq estão disponíveis no *Gene Expression Omnibus* (*accession* GSE128300). O projeto incluirá as 5 amostras de displasia cortical focal do tipo IIb coletadas durante cirurgia de epilepsia, bem como 8 amostras controle, coletadas durante autópsia ou de pacientes menores de 25 anos sem histórico de crises (doença não especificada no artigo[9]). 
+
+Foi obtida a matriz de expressão (*raw counts*). Genes com menos de 10 reads em pelo menos 5 das 13 amostras foram removidos. Para o cálculo da matriz de distância/clustering hierárquico e da correlação entre a expressão dos genes, foi usada a transformação VST (*variance stabilizing transformation*). 
+
+
 
 # Modelo Lógico
 > ![Modelo Lógico de Grafos](assets/images/logical_model.png)
