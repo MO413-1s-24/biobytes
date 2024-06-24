@@ -7,7 +7,7 @@ A presente proposta de estudo aplica métodos de ciência de redes na análise d
 
 # Slides
 
-[Slides da apresentação do projeto 2](assets/slides/slides-pt3.pdf)
+[Slides da apresentação do projeto 3](assets/slides/slides-pt3.pdf)
 
 
 # Fundamentação Teórica
