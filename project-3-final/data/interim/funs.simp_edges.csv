@@ -1,0 +1,211 @@
+bio_function,geneID
+myeloid cell activation involved in immune response,CX3CR1
+myeloid cell activation involved in immune response,TREM2
+myeloid cell activation involved in immune response,CD84
+myeloid cell activation involved in immune response,F2RL1
+myeloid cell activation involved in immune response,ITGB2
+myeloid cell activation involved in immune response,SYK
+myeloid cell activation involved in immune response,DOCK2
+myeloid cell activation involved in immune response,LILRA2
+myeloid cell activation involved in immune response,PTAFR
+myeloid cell activation involved in immune response,ITGAM
+regulation of myeloid leukocyte mediated immunity,CX3CR1
+regulation of myeloid leukocyte mediated immunity,C3
+regulation of myeloid leukocyte mediated immunity,CD84
+regulation of myeloid leukocyte mediated immunity,F2RL1
+regulation of myeloid leukocyte mediated immunity,ITGB2
+regulation of myeloid leukocyte mediated immunity,SYK
+regulation of myeloid leukocyte mediated immunity,PTAFR
+regulation of myeloid leukocyte mediated immunity,ITGAM
+myeloid leukocyte activation,FCER2
+myeloid leukocyte activation,CX3CR1
+myeloid leukocyte activation,TREM2
+myeloid leukocyte activation,CD84
+myeloid leukocyte activation,LILRB4
+myeloid leukocyte activation,F2RL1
+myeloid leukocyte activation,ITGB2
+myeloid leukocyte activation,SYK
+myeloid leukocyte activation,DOCK2
+myeloid leukocyte activation,TLR1
+myeloid leukocyte activation,LILRA2
+myeloid leukocyte activation,TLR6
+myeloid leukocyte activation,PTAFR
+myeloid leukocyte activation,ITGAM
+synapse pruning,CX3CR1
+synapse pruning,C3
+synapse pruning,TREM2
+synapse pruning,C1QC
+synapse pruning,ITGAM
+tumor necrosis factor production,LTF
+tumor necrosis factor production,CX3CR1
+tumor necrosis factor production,TREM2
+tumor necrosis factor production,CD84
+tumor necrosis factor production,LILRB4
+tumor necrosis factor production,SYK
+tumor necrosis factor production,TLR1
+tumor necrosis factor production,GHRL
+tumor necrosis factor production,GPNMB
+tumor necrosis factor production,CYBB
+tumor necrosis factor production,LILRA2
+tumor necrosis factor production,PTAFR
+regulation of tumor necrosis factor production,LTF
+regulation of tumor necrosis factor production,CX3CR1
+regulation of tumor necrosis factor production,TREM2
+regulation of tumor necrosis factor production,CD84
+regulation of tumor necrosis factor production,LILRB4
+regulation of tumor necrosis factor production,SYK
+regulation of tumor necrosis factor production,TLR1
+regulation of tumor necrosis factor production,GHRL
+regulation of tumor necrosis factor production,GPNMB
+regulation of tumor necrosis factor production,CYBB
+regulation of tumor necrosis factor production,LILRA2
+regulation of tumor necrosis factor production,PTAFR
+tumor necrosis factor superfamily cytokine production,LTF
+tumor necrosis factor superfamily cytokine production,CX3CR1
+tumor necrosis factor superfamily cytokine production,TREM2
+tumor necrosis factor superfamily cytokine production,CD84
+tumor necrosis factor superfamily cytokine production,LILRB4
+tumor necrosis factor superfamily cytokine production,SYK
+tumor necrosis factor superfamily cytokine production,TLR1
+tumor necrosis factor superfamily cytokine production,GHRL
+tumor necrosis factor superfamily cytokine production,GPNMB
+tumor necrosis factor superfamily cytokine production,CYBB
+tumor necrosis factor superfamily cytokine production,LILRA2
+tumor necrosis factor superfamily cytokine production,PTAFR
+regulation of tumor necrosis factor superfamily cytokine production,LTF
+regulation of tumor necrosis factor superfamily cytokine production,CX3CR1
+regulation of tumor necrosis factor superfamily cytokine production,TREM2
+regulation of tumor necrosis factor superfamily cytokine production,CD84
+regulation of tumor necrosis factor superfamily cytokine production,LILRB4
+regulation of tumor necrosis factor superfamily cytokine production,SYK
+regulation of tumor necrosis factor superfamily cytokine production,TLR1
+regulation of tumor necrosis factor superfamily cytokine production,GHRL
+regulation of tumor necrosis factor superfamily cytokine production,GPNMB
+regulation of tumor necrosis factor superfamily cytokine production,CYBB
+regulation of tumor necrosis factor superfamily cytokine production,LILRA2
+regulation of tumor necrosis factor superfamily cytokine production,PTAFR
+purinergic nucleotide receptor signaling pathway,GPR34
+purinergic nucleotide receptor signaling pathway,P2RY12
+purinergic nucleotide receptor signaling pathway,P2RY13
+purinergic nucleotide receptor signaling pathway,ADORA3
+purinergic nucleotide receptor signaling pathway,CNTN2
+purinergic nucleotide receptor signaling pathway,PTAFR
+chemotaxis,CX3CR1
+chemotaxis,TREM2
+chemotaxis,P2RY12
+chemotaxis,C3AR1
+chemotaxis,CSF1R
+chemotaxis,F2RL1
+chemotaxis,LSP1
+chemotaxis,ITGB2
+chemotaxis,ENPP2
+chemotaxis,SYK
+chemotaxis,DOCK2
+chemotaxis,PLXNB3
+chemotaxis,PLD1
+chemotaxis,BIN2
+chemotaxis,CMTM5
+chemotaxis,GPNMB
+chemotaxis,NCKAP1L
+chemotaxis,PTAFR
+taxis,CX3CR1
+taxis,TREM2
+taxis,P2RY12
+taxis,C3AR1
+taxis,CSF1R
+taxis,F2RL1
+taxis,LSP1
+taxis,ITGB2
+taxis,ENPP2
+taxis,SYK
+taxis,DOCK2
+taxis,PLXNB3
+taxis,PLD1
+taxis,BIN2
+taxis,CMTM5
+taxis,GPNMB
+taxis,NCKAP1L
+taxis,PTAFR
+central nervous system myelination,MAG
+central nervous system myelination,FA2H
+central nervous system myelination,MYRF
+central nervous system myelination,SOX10
+central nervous system myelination,CNTN2
+axon ensheathment in central nervous system,MAG
+axon ensheathment in central nervous system,FA2H
+axon ensheathment in central nervous system,MYRF
+axon ensheathment in central nervous system,SOX10
+axon ensheathment in central nervous system,CNTN2
+positive regulation of superoxide anion generation,F2RL1
+positive regulation of superoxide anion generation,ITGB2
+positive regulation of superoxide anion generation,SYK
+positive regulation of superoxide anion generation,ITGAM
+leukocyte cell-cell adhesion,CX3CR1
+leukocyte cell-cell adhesion,SELPLG
+leukocyte cell-cell adhesion,OLR1
+leukocyte cell-cell adhesion,TMIGD2
+leukocyte cell-cell adhesion,LILRB4
+leukocyte cell-cell adhesion,ITGB2
+leukocyte cell-cell adhesion,DOCK8
+leukocyte cell-cell adhesion,ITGAL
+leukocyte cell-cell adhesion,SYK
+leukocyte cell-cell adhesion,RASAL3
+leukocyte cell-cell adhesion,ICOSLG
+leukocyte cell-cell adhesion,GPNMB
+leukocyte cell-cell adhesion,TNFAIP8L2
+leukocyte cell-cell adhesion,NCKAP1L
+leukocyte cell-cell adhesion,PTAFR
+cell surface toll-like receptor signaling pathway,LTF
+cell surface toll-like receptor signaling pathway,TREM2
+cell surface toll-like receptor signaling pathway,F2RL1
+cell surface toll-like receptor signaling pathway,TLR1
+cell surface toll-like receptor signaling pathway,LILRA2
+cell surface toll-like receptor signaling pathway,TLR6
+response to bacterial lipopeptide,TLR1
+response to bacterial lipopeptide,TLR6
+response to bacterial lipopeptide,TLR10
+regulation of peptidyl-tyrosine phosphorylation,TREM2
+regulation of peptidyl-tyrosine phosphorylation,SAMSN1
+regulation of peptidyl-tyrosine phosphorylation,CSF1R
+regulation of peptidyl-tyrosine phosphorylation,LILRB4
+regulation of peptidyl-tyrosine phosphorylation,ITGB2
+regulation of peptidyl-tyrosine phosphorylation,ENPP2
+regulation of peptidyl-tyrosine phosphorylation,SYK
+regulation of peptidyl-tyrosine phosphorylation,ERBB3
+regulation of peptidyl-tyrosine phosphorylation,TGFA
+glycosylceramide metabolic process,UGT8
+glycosylceramide metabolic process,FA2H
+glycosylceramide metabolic process,GAL3ST1
+organic hydroxy compound transport,AQP3
+organic hydroxy compound transport,SLC5A11
+organic hydroxy compound transport,TREM2
+organic hydroxy compound transport,PCSK9
+organic hydroxy compound transport,ABCB4
+organic hydroxy compound transport,SYK
+organic hydroxy compound transport,ADORA3
+organic hydroxy compound transport,KCNQ1
+organic hydroxy compound transport,GHRL
+organic hydroxy compound transport,LIPG
+response to axon injury,MAG
+response to axon injury,TREM2
+response to axon injury,GIPR
+response to axon injury,TNC
+response to axon injury,P2RY12
+positive regulation of cytosolic calcium ion concentration,CX3CR1
+positive regulation of cytosolic calcium ion concentration,FFAR1
+positive regulation of cytosolic calcium ion concentration,GIPR
+positive regulation of cytosolic calcium ion concentration,C3AR1
+positive regulation of cytosolic calcium ion concentration,F2RL1
+positive regulation of cytosolic calcium ion concentration,GHRL
+positive regulation of cytosolic calcium ion concentration,TAC1
+biological process involved in intraspecies interaction between organisms,LTF
+biological process involved in intraspecies interaction between organisms,CX3CR1
+biological process involved in intraspecies interaction between organisms,TREM2
+biological process involved in intraspecies interaction between organisms,KCNQ1
+triglyceride catabolic process,GPIHBP1
+triglyceride catabolic process,LIPG
+triglyceride catabolic process,LIPE
+adult feeding behavior,NPY
+adult feeding behavior,GHRL
+actomyosin contractile ring organization,IQGAP3
+actomyosin contractile ring organization,RTKN

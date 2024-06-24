@@ -1,0 +1,131 @@
+Description,geneID
+specific granule membrane,TMEM63A
+specific granule membrane,OLR1
+specific granule membrane,C3AR1
+specific granule membrane,ITGB2
+specific granule membrane,ITGAL
+specific granule membrane,CD53
+specific granule membrane,PLD1
+specific granule membrane,CYBB
+specific granule membrane,ITGAM
+specific granule,LTF
+specific granule,TMEM63A
+specific granule,OLR1
+specific granule,C3AR1
+specific granule,ITGB2
+specific granule,ITGAL
+specific granule,DOCK2
+specific granule,CD53
+specific granule,PLD1
+specific granule,CYBB
+specific granule,ITGAM
+tertiary granule membrane,TMEM63A
+tertiary granule membrane,OLR1
+tertiary granule membrane,ITGB2
+tertiary granule membrane,CD53
+tertiary granule membrane,PLD1
+tertiary granule membrane,CYBB
+tertiary granule membrane,PTAFR
+tertiary granule membrane,ITGAM
+external side of plasma membrane,SERPINA5
+external side of plasma membrane,CLEC17A
+external side of plasma membrane,FCER2
+external side of plasma membrane,CX3CR1
+external side of plasma membrane,MOG
+external side of plasma membrane,SDC1
+external side of plasma membrane,PCSK9
+external side of plasma membrane,CD84
+external side of plasma membrane,GPIHBP1
+external side of plasma membrane,CSF2RA
+external side of plasma membrane,ITGB2
+external side of plasma membrane,ITGAL
+external side of plasma membrane,ICOSLG
+external side of plasma membrane,SCUBE1
+external side of plasma membrane,ITGAM
+apical plasma membrane,SLC47A2
+apical plasma membrane,TF
+apical plasma membrane,SLC5A11
+apical plasma membrane,TMEM235
+apical plasma membrane,ACY3
+apical plasma membrane,CLCA4
+apical plasma membrane,CYP4F12
+apical plasma membrane,ABCB4
+apical plasma membrane,GPIHBP1
+apical plasma membrane,ERBB3
+apical plasma membrane,SLC6A9
+apical plasma membrane,PLD1
+apical plasma membrane,KCNQ1
+apical plasma membrane,PTPRH
+apical plasma membrane,ASPM
+membrane raft,MAG
+membrane raft,TREM2
+membrane raft,SELPLG
+membrane raft,PLVAP
+membrane raft,OLR1
+membrane raft,ABCB4
+membrane raft,ITGB2
+membrane raft,KCNQ1
+membrane raft,TLR1
+membrane raft,TLR6
+membrane raft,LIPE
+membrane raft,ITGAM
+membrane microdomain,MAG
+membrane microdomain,TREM2
+membrane microdomain,SELPLG
+membrane microdomain,PLVAP
+membrane microdomain,OLR1
+membrane microdomain,ABCB4
+membrane microdomain,ITGB2
+membrane microdomain,KCNQ1
+membrane microdomain,TLR1
+membrane microdomain,TLR6
+membrane microdomain,LIPE
+membrane microdomain,ITGAM
+apical part of cell,SLC47A2
+apical part of cell,TF
+apical part of cell,SLC5A11
+apical part of cell,TMEM235
+apical part of cell,ACY3
+apical part of cell,CLCA4
+apical part of cell,CYP4F12
+apical part of cell,ABCB4
+apical part of cell,GPIHBP1
+apical part of cell,ERBB3
+apical part of cell,SLC6A9
+apical part of cell,PLD1
+apical part of cell,KCNQ1
+apical part of cell,PTPRH
+apical part of cell,ASPM
+plasma membrane signaling receptor complex,TF
+plasma membrane signaling receptor complex,APBB1IP
+plasma membrane signaling receptor complex,TMIGD2
+plasma membrane signaling receptor complex,CSF2RA
+plasma membrane signaling receptor complex,ITGB2
+plasma membrane signaling receptor complex,ITGAL
+plasma membrane signaling receptor complex,SYK
+plasma membrane signaling receptor complex,ERBB3
+plasma membrane signaling receptor complex,TLR1
+plasma membrane signaling receptor complex,TLR6
+plasma membrane signaling receptor complex,ITGAM
+phagocytic vesicle,LTF
+phagocytic vesicle,PLD4
+phagocytic vesicle,SYK
+phagocytic vesicle,MPEG1
+phagocytic vesicle,TLR1
+phagocytic vesicle,CYBB
+phagocytic vesicle,TLR6
+plasma membrane raft,TREM2
+plasma membrane raft,SELPLG
+plasma membrane raft,PLVAP
+plasma membrane raft,ITGB2
+plasma membrane raft,LIPE
+plasma membrane raft,ITGAM
+collagen trimer,CCBE1
+collagen trimer,GLDN
+collagen trimer,COL4A5
+collagen trimer,C1QC
+collagen trimer,COL8A2
+protein complex involved in cell adhesion,TNC
+protein complex involved in cell adhesion,ITGB2
+protein complex involved in cell adhesion,ITGAL
+protein complex involved in cell adhesion,ITGAM
