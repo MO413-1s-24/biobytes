@@ -137,7 +137,7 @@ Da mesma forma, obtemos as funções biológicas mais improtantes e os component
 > Tumor necrosis factor production | 12
 > Organic hydroxy compound transport | 10
 
-> Componente ceuluar mais importante | Grau
+> Componente celular mais importante | Grau
 > ----- | -----
 > External side of plasma membrane | 15
 > Apical plasma membrane | 15
