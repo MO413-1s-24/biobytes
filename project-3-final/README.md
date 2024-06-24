@@ -47,7 +47,7 @@ Para a realização deste trabalho, seguimos o seguinte fluxo:
 
 Para analisar a expressão gênica diferencial, utilizamos métodos estatísticos do DESeq2. Esta ferramenta permite modelar a contagem de leituras usando uma distribuição negativa binomial e realiza testes de hipótese para determinar genes com expressão significativamente diferente entre as condições.
 
-Com os genes diferencialmente expressos identificados, criamos uma rede de interações. Esta rede permite visualizar e analisar as relações entre os genes, bem como suas funções biológicas associadas. Ao integrar a rede com informações de anotação funcional, do *Gene Ontology*, foi possível relacionar os genes com as suas respectivas funções biológicas e vias de sinalização que estão envolvidas, resultando em uma **análise de enriquencimento funcional**.
+Com os genes diferencialmente expressos identificados, criamos uma rede de interações. Esta rede permite visualizar e analisar as relações entre os genes, bem como suas funções biológicas associadas. Ao integrar a rede com informações de anotação funcional, do *Gene Ontology*, foi possível relacionar os genes com as suas respectivas funções biológicas e vias de sinalização que estão envolvidas, resultando em uma **análise de enriquecimento funcional**.
 
 Utilizamos a Correlação de Pearson nos genes diferencialmente expressos, para criar relações (arestas) entre genes, e filtramos as aretas em que a correlação é maior (p \< 0.05 e statistic \> 0.85).
 
@@ -55,7 +55,7 @@ Além disso, também fizemos outra análise de enriquecimento que foi em relaç�
 
 A partir destas redes geradas, fizemos integrações entre elas: gene-função biológica; gene-componente celular; e, por fim, a rede com todos os esses nós, com uma visão geral das interações. As redes, assim como grande parte das análises, foram todas geradas no Cytoscape.
 
-Utilizando outras técnicas de ciência de redes, exploramos ainda mais a organização e a dinâmica dos genes na rede. A **análise de centralidade** possibilitou a identificação de genes centrais (“hubs”) que desempenham papéis importantes no funcionamento da epilepsia, sendo potenciais alvos para tratamento. A **detecção de comunidades** revelou grupos de genes que interagem entre si de forma mais intensa que com outros, identificando módulos desregulados que podem estar associados à epilepsia e fornecendo informações sobre as funções biológicas destes módulos. Além disso, a **análise de perturbação e robustez** e a **predição de links** também foram realizadas nas redes geradas, mas as informações obtidas nessas análises não foram suficientes para concluir obtermos conclusões biológicas. As análises detalhadas dessas técnicas podem ser vistas na seção de Análises Realizadas e Discussão.
+Utilizando outras técnicas de ciência de redes, exploramos ainda mais a organização e a dinâmica dos genes na rede. A **análise de centralidade** possibilitou a identificação de genes centrais (“hubs”) que desempenham papéis importantes no funcionamento da epilepsia, sendo potenciais alvos para tratamento. A **detecção de comunidades** revelou grupos de genes que interagem entre si de forma mais intensa que com outros, identificando módulos desregulados que podem estar associados à epilepsia e fornecendo informações sobre as funções biológicas destes módulos. Além disso, a **análise de perturbação e robustez** e a **predição de links** também foram realizadas nas redes geradas, mas as informações obtidas nessas análises não foram suficientes para obtermos conclusões biológicas. As análises detalhadas dessas técnicas podem ser vistas na seção de Análises Realizadas e Discussão.
 
 ## Bases de Dados
 
@@ -115,7 +115,7 @@ Além disso, foram calculadas as médias de grau dos nós de cada tipo de nó, d
 > Média de grau dos nós de tipo Função Biológica | 8.08
 > Média de grau dos nós de tipo Componente Celular | 10.00
 
-A partir destas redes, as análises feitas nesse trabalho foram: análise de enriquecimento funcional, análise de centralidade, detecção de comunidades, análise de perturbação e robustez e predição de links. As análises de enriquecimento funcional e de centralidade foram feitas com sucesso, e as análises de detecção de comunidades e de perturbação e robustez foram feitas, mas não obtivemos resultados biológicos claros.
+A partir destas redes, as análises feitas nesse trabalho foram: análise de enriquecimento funcional, análise de centralidade, detecção de comunidades, análise de perturbação e robustez e predição de links. As análises de enriquecimento funcional, de centralidade e de detecção de comunidades foram feitas com sucesso, e as análises de predição de links e de perturbação e robustez foram feitas, mas não obtivemos resultados biológicos claros.
 
 Em relação as análises de enriquecimento funcional, foi possível identificar as funções biológicas mais representadas na doença, bem como os componentes celulares mais importantes. A análise de centralidade permitiu identificar os genes mais importantes na rede, que podem ser alvos para tratamento. Abaixo, temos a tabela dos 5 genes com maior grau na rede de genes diferencialmente expressos.
 
