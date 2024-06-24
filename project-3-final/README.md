@@ -47,25 +47,13 @@ Para a realização deste trabalho, seguimos o seguinte fluxo:
 
 Para analisar a expressão gênica diferencial, utilizamos métodos estatísticos do DESeq2. Esta ferramenta permite modelar a contagem de leituras usando uma distribuição negativa binomial e realiza testes de hipótese para determinar genes com expressão significativamente diferente entre as condições.
 
-Com os genes diferencialmente expressos identificados, criamos uma rede de interações. Esta rede permite visualizar e analisar as relações entre os genes, bem como suas funções biológicas associadas. Ao integrar a rede com informações de anotação funcional, do *Gene Ontology*, foi possível relacionar os genes com as suas respectivas funções biológicas e vias de sinalização que estão envolvidas, resultando em uma **análise de enriquencimento funcional**, gerando a seguinte rede no Cytoscape:
+Com os genes diferencialmente expressos identificados, criamos uma rede de interações. Esta rede permite visualizar e analisar as relações entre os genes, bem como suas funções biológicas associadas. Ao integrar a rede com informações de anotação funcional, do *Gene Ontology*, foi possível relacionar os genes com as suas respectivas funções biológicas e vias de sinalização que estão envolvidas, resultando em uma **análise de enriquencimento funcional**.
 
-> ![Rede de análise funcional (funções biológicas e genes relacionados a elas)](assets/images/rede_funcoes.png)
+Utilizamos a Correlação de Pearson nos genes diferencialmente expressos, para criar relações (arestas) entre genes, e filtramos as aretas em que a correlação é maior (p \< 0.05 e statistic \> 0.85).
 
-Utilizamos a Correlação de Pearson nos genes diferencialmente expressos, para criar relações (arestas) entre genes, e filtramos as aretas em que a correlação é maior (p \< 0.05 e statistic \> 0.85), gerando a seguinte rede no Cytoscape:
+Além disso, também fizemos outra análise de enriquecimento que foi em relação aos componentes celulares ligados aos genes calculados na rede de genes diferencialmente expressos.
 
-> ![Rede de genes upregulados](assets/images/rede_genes.png)
-
-Além disso, também fizemos outra análise de enriquecimento que foi em relação aos componentes celulares ligados aos genes calculados na rede de genes diferencialmente expressos. A rede gerada foi a seguinte:
-
-> ![Rede de análise funcional (componentes celulares e genes relacionados a eles)](assets/images/rede_comp_celular.png)
-
-A partir destas redes geradas, fizemos integrações entre elas: gene-função biológica; gene-componente celular; e, por fim, a rede com todos os esses nós, com uma visão geral das interações. As redes foram todas geradas no Cytoscape, e podem ser visualizadas nas imagens abaixo:
-
-> ![Rede integrada gene-função biológica](assets/images/rede_genes_e_funcoes.png)
-
-> ![Rede integrada gene-componente celular](assets/images/rede_genes_e_componentes.png)
-
-> ![Rede integrada geral](assets/images/rede_geral.png)
+A partir destas redes geradas, fizemos integrações entre elas: gene-função biológica; gene-componente celular; e, por fim, a rede com todos os esses nós, com uma visão geral das interações. As redes, assim como grande parte das análises, foram todas geradas no Cytoscape.
 
 Utilizando outras técnicas de ciência de redes, exploramos ainda mais a organização e a dinâmica dos genes na rede. A **análise de centralidade** possibilitou a identificação de genes centrais (“hubs”) que desempenham papéis importantes no funcionamento da epilepsia, sendo potenciais alvos para tratamento. A **detecção de comunidades** revelou grupos de genes que interagem entre si de forma mais intensa que com outros, identificando módulos desregulados que podem estar associados à epilepsia e fornecendo informações sobre as funções biológicas destes módulos. Além disso, a **análise de perturbação e robustez** e a **predição de links** também foram realizadas nas redes geradas, mas as informações obtidas nessas análises não foram suficientes para concluir obtermos conclusões biológicas. As análises detalhadas dessas técnicas podem ser vistas na seção de Análises Realizadas e Discussão.
 
@@ -86,10 +74,29 @@ Foi obtida a matriz de expressão (*raw counts*). Genes com menos de 10 reads em
 ## Integração entre Bases
 A integração das bases de dados foi feita utilizando a biblioteca Pandas do Python, em que as informações foram filtradas e organizadas em tabelas de arestas e de nós. Nessa etapa, não houveram dificuldades. 
 
-## Resultados e Análise Realizadas
-Como citado anteriormente, as análises de rede que foram feitas nesse trabalho foram: análise de enriquecimento funcional, análise de centralidade, detecção de comunidades, análise de perturbação e robustez e predição de links. As análises de enriquecimento funcional e de centralidade foram feitas com sucesso, e as análises de detecção de comunidades e de perturbação e robustez foram feitas, mas não obtivemos resultados biológicos claros.
+## Resultados e Análises Realizadas
+Como citado na seção de Metodologia, fizemos a geração de redes de genes diferencialmente expressos, de funções biológicas e de componentes celulares. Além disso, fizemos a integração dessas redes, primeiro separadamente (gene-função biológica e gene-componente celular) e depois de forma geral.
 
-Em relação as análises de enriquecimento funcional, foi possível identificar as funções biológicas mais representadas na doença, bem como os componentes celulares mais importantes. A análise de centralidade permitiu identificar os genes mais importantes na rede, que podem ser alvos para tratamento. Abaixo, temos as tabelas com a contagem de nós de cada tipo de nó e aresta nas redes geradas, e em seguida a média de grau dos nós de cada tipo.
+As redes geradas estão demonstradas a seguir:
+### Rede de Genes Diferencialmente Expressos
+> ![Rede de genes upregulados](assets/images/rede_gene_gene.png)
+
+### Rede de Funções Biológicas
+> ![Rede de análise funcional (funções biológicas e genes relacionados a elas)](assets/images/rede_funcao.png)
+
+### Rede de Componentes Celulares
+> ![Rede de análise funcional (componentes celulares e genes relacionados a eles)](assets/images/rede_comp.png)
+
+### Rede Integrada - Gene-Função Biológica
+> ![Rede integrada gene-função biológica](assets/images/rede_func_gene_gene.png)
+
+### Rede Integrada - Gene-Componente Celular
+> ![Rede integrada gene-componente celular](assets/images/rede_comp_gene_gene.png)
+
+### Rede Integrada Geral
+> ![Rede integrada geral](assets/images/rede_geral.png)
+
+Abaixo, temos as tabelas com a contagem de nós de cada tipo de nó e aresta nas redes geradas.
 
 > Descrição | Valor
 > ----- | -----
@@ -100,11 +107,43 @@ Em relação as análises de enriquecimento funcional, foi possível identificar
 > Número de arestas Gene-Função | 210
 > Número de aresta Gene-Componete Celular | 130
 
+Além disso, foram calculadas as médias de grau dos nós de cada tipo de nó, demonstrados na tabela a seguir:
+
 > Descrição | Valor
 > ----- | -----
 > Média de grau dos nós de tipo Gene | 32.37
 > Média de grau dos nós de tipo Função Biológica | 8.08
 > Média de grau dos nós de tipo Componente Celular | 10.00
+
+A partir destas redes, as análises feitas nesse trabalho foram: análise de enriquecimento funcional, análise de centralidade, detecção de comunidades, análise de perturbação e robustez e predição de links. As análises de enriquecimento funcional e de centralidade foram feitas com sucesso, e as análises de detecção de comunidades e de perturbação e robustez foram feitas, mas não obtivemos resultados biológicos claros.
+
+Em relação as análises de enriquecimento funcional, foi possível identificar as funções biológicas mais representadas na doença, bem como os componentes celulares mais importantes. A análise de centralidade permitiu identificar os genes mais importantes na rede, que podem ser alvos para tratamento. Abaixo, temos a tabela dos 5 genes com maior grau na rede de genes diferencialmente expressos.
+
+> Gene mais importante | Grau
+> ----- | -----
+> TREM2 | 82
+> TF | 74
+> NINJ2 | 72
+> FA2H | 72
+> UGT8 | 71
+
+Da mesma forma, obtemos as funções biológicas mais improtantes e os componentes celulares mais importantes, demonstdados nas tabelas a seguir.
+
+> Função mais importante | Grau
+> ----- | -----
+> Chemotaxis | 18
+> Leukocyte cell-cell adhesion | 15
+> Myeloid leukocyte activation | 14
+> Tumor necrosis factor production | 12
+> Organic hydroxy compound transport | 10
+
+Componente ceuluar mais importante | Grau
+> ----- | -----
+> External side of plasma membrane | 15
+> Apical plasma membrane | 15
+> Apical part of cell | 15
+> Membrane raft | 12
+> Membrane microdomain | 12
 
 Também foi realizada a análise de comunidades, que permitiu identificar módulos de genes que interagem entre si de forma mais intensa que com outros. 
 
@@ -121,8 +160,8 @@ Além disso, tivemos dificuldades para interpretar os resultados das análises d
 # Ferramentas
 
 Neste trabalho, utilizamos as seguintes ferramentas:
-1. **Testes de expressão diferencial (DESeq2)**, para obtenção de genes diferencialmente expressos entre a doença e controles;
-2. **Cytoscape**, para geração de rede de genes diferencialmente expressos, da rede de funções biológicas, da rede de componentes celulares, e da rede integrada;
+1. **Testes de expressão diferencial (DESeq2)**: para obtenção de genes diferencialmente expressos entre a doença e controles;
+2. **Cytoscape**: para geração de rede de genes diferencialmente expressos, da rede de funções biológicas, da rede de componentes celulares, e da rede integrada;
 3. **Pandas**: biblioteca do Python utilizada para processamento das tabelas.
 3. **NetworkX**: biblioteca do Python utilizada para filtrar e analisar rede. 
 
