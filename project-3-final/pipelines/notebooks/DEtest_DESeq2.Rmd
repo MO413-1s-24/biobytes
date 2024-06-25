@@ -1,0 +1,378 @@
+---
+title: "Differential Expression Analysis with DESeq2"
+author: biobytes
+output: 
+  html_document:
+    code_folding: hide
+    df_print: paged
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+# Setup
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(GenomicFeatures)
+library(edgeR)
+library(grid)
+library(org.Hs.eg.db)
+library(DESeq2)
+library(clusterProfiler)
+library(tidyverse)
+library(readxl)
+library(RColorBrewer)
+library(pheatmap)
+
+```
+
+# Load data 
+
+```{r}
+# Read in count matrix 
+counts <- read.delim("data/rsem.merged.gene_counts.tsv") %>% 
+  mutate(gene_id = str_remove(gene_id, "\\..+")) %>% 
+  select(-transcript_id.s.) %>%
+  filter(!duplicated(gene_id)) %>%
+  column_to_rownames("gene_id")
+
+# Map ENSEMBL into symbols
+symb <- clusterProfiler::bitr(rownames(counts), 
+                              fromType = "ENSEMBL", toType = "SYMBOL", 
+                              OrgDb = org.Hs.eg.db) %>% 
+  filter(!duplicated(SYMBOL))
+counts <- counts[symb$ENSEMBL, ]
+
+# Transform ids into symbols in the counts matrix 
+counts <- counts %>% 
+  rownames_to_column("ENSEMBL") %>%
+  right_join(symb, by = "ENSEMBL") %>%
+  column_to_rownames("SYMBOL") %>% 
+  select(-ENSEMBL)
+
+# Export as tsv
+write_tsv(counts, "results/rsem.merged.gene_counts_SYMBOL.tsv")
+
+
+# Read in metadata
+meta <- read_excel("data/std_meta_Aus.xlsx")
+
+```
+
+
+# Tidy data
+
+```{r, warning = FALSE}
+# Set same names for sample names in the metadata and the count matrix 
+counts <- counts[meta$sample] # same order
+rownames(meta) <- meta$sample
+counts <- counts[meta$sample]
+#all(colnames(counts) == rownames(meta))
+```
+
+
+# Create DESeq2 Object 
+
+```{r}
+# Create DESeq2 object 
+meta <- meta %>% mutate(diagnosis = str_remove(diagnosis, " |-"),
+                        diagnosis = factor(diagnosis), 
+                        lobe = factor(lobe))
+dds <- DESeqDataSetFromMatrix(countData = round(counts), 
+                              colData = meta, 
+                              design = ~ diagnosis + lobe)
+
+# Prefilter
+keep <- rowSums(counts(dds) >= 10) >= 5
+dds <- dds[keep,]
+```
+
+
+# Differential Expression Test
+
+The design was specified when creating the object. 
+
+```{r}
+dds <- DESeq(dds)
+```
+
+Extract normalized/transformed counts:
+
+```{r}
+norm <- counts(dds, normalized = TRUE)
+
+# Export normalized counts 
+write.csv(norm, "results/normalized_counts_DESeq2.csv", row.names = TRUE)
+
+# Transformed variance: - for visualization
+vsd <- vst(dds, blind = FALSE)
+vsd <- vsd[, vsd$diagnosis %in% c("Control", "FCDIIb")]
+
+# Export 
+write.csv(assay(vsd), "results/vsd.csv", row.names = TRUE)
+```
+
+
+
+# Results 
+
+## Sample distances 
+
+```{r} 
+
+# Get sample-to-sample distances 
+dist <- dist(t(assay(vsd)))
+
+# Distance matrix 
+sampleDistMatrix <- as.matrix( dist )
+#colnames(sampleDistMatrix) <- NULL
+
+colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+
+annotation_rows = data.frame(
+    Diagnosis = vsd$diagnosis
+)
+rownames(annotation_rows) <- row.names(sampleDistMatrix)
+
+ann_colors = list(
+  Diagnosis = c("Control" = "darkgreen", "FCDIIb" = "orange")
+)
+
+pheatmap(sampleDistMatrix,
+         clustering_distance_rows=dist,
+         clustering_distance_cols=dist,
+         annotation_row = NULL,
+         annotation_col = annotation_rows,
+         show_colnames = F,
+         show_rownames = F,
+         annotation_colors = ann_colors,
+         col=colors,
+         clustering_method = "complete"
+) 
+
+# Export as svg 
+ggsave("results/sample_distance.svg",
+       width = 6, 
+       height = 4, 
+       dpi = 300)
+```
+
+
+## FCD IIb vs. Non-Epileptic Controls
+
+```{r} 
+res <- results(dds, contrast = c("diagnosis", "FCDIIb", "Control"))
+```
+
+All genes: 
+
+```{r}
+summary(res)
+#resultsNames(dds)
+
+res <- res %>%
+  as.data.frame() %>%
+  rownames_to_column("gene") %>%
+  select(gene, log2FoldChange, pvalue, padj) %>% 
+  mutate(across(c("log2FoldChange", padj), round, digits = 4))
+DT::datatable(res, options = list(ordering = FALSE), filter = "top")
+```
+
+Significant changes (FC > 3):
+
+```{r}
+sig <- res %>% 
+  filter(padj < 0.1, abs(log2FoldChange) > log2(3)) %>% 
+  arrange(desc(log2FoldChange))
+
+sum(sig$log2FoldChange > 0)
+
+DT::datatable(sig, options = list(ordering = FALSE), filter = "top")
+```
+
+Export list:
+
+```{r}
+setwd("~/Library/CloudStorage/GoogleDrive-icottagalvao@gmail.com/My Drive/Doutorado/Disciplinas/MO413 - Ciência de dados e visualização em saúde/ProjetoFinal")
+
+# All genes with fold changes 
+write.csv(res, "results/all_DEGs_FCDIIbvsControl.csv", row.names = FALSE)
+
+# Significant genes 
+write.csv(sig, "results/significant_DEGs_FCDIIbvsControl.csv", row.names = FALSE)
+
+```
+
+
+### Visualization 
+
+Volcano plot:
+
+```{r}
+# Create new column if up/down regulated 
+res <- res %>% 
+  mutate(Status = case_when(log2FoldChange > log2(3) & padj < 0.1 ~ "Up-regulated", log2FoldChange < -log2(3) & padj < 0.1 ~ "Down-regulated", TRUE ~ "Not significant"),
+         label = ifelse((padj < 0.1 & abs(log2FoldChange) > 2.5), gene, "")) 
+
+ggplot(res, aes(x = log2FoldChange, y = -log10(padj), color = Status, label = label)) + 
+  geom_vline(xintercept = c(-log2(3), log2(3)), col = "gray", linetype = 'dashed') +
+  geom_hline(yintercept = -log10(0.1), col = "gray", linetype = 'dashed') + 
+  geom_point() + 
+  ggrepel::geom_text_repel(size = 2, color = "black")+
+  ylim(0, 5) + 
+  scale_color_manual(values = c("Up-regulated"="red", "Down-regulated"="blue", "Not significant" = "black")) + 
+  theme_classic() 
+
+
+# Export as svg 
+ggsave("results/volcano_plot.svg",
+       width = 6, 
+       height = 4, 
+       dpi = 300)
+```
+
+```{r}
+# Get just significantly up-regulated genes 
+up <- sig %>% 
+  filter(log2FoldChange > 0)
+
+write.csv(up, 
+          "results/significantly_upregulated_genes.csv",
+          row.names = FALSE)
+```
+
+
+
+### Functional Enrichment 
+
+#### Functions
+
+```{r}
+ego <- enrichGO(up$gene, 
+             OrgDb = org.Hs.eg.db,
+             ont = "BP", 
+             keyType = "SYMBOL",
+             pvalueCutoff = 0.05)
+```
+
+All functions:
+
+```{r}
+# All functions
+funs <- ego@result %>% 
+  as.data.frame %>% 
+  select(Description, GeneRatio, geneID)
+DT::datatable(funs, options = list(ordering = FALSE), filter = "top")
+```
+
+Simplified:
+
+```{r}
+ego.simp <- clusterProfiler::simplify(ego, cutoff = 0.4)
+funs.simp <- ego.simp@result %>% 
+  as.data.frame %>% 
+  dplyr::select(Description, GeneRatio, geneID) 
+DT::datatable(funs.simp, options = list(ordering = FALSE))
+```
+
+
+```{r}
+# Export simplified functions table 
+write.csv(funs.simp, 
+          "results/functions.simp.csv")
+```
+
+
+Make edge table:
+
+```{r}
+funs.simp.edge <- funs.simp %>% 
+  dplyr::select(Description, geneID) %>% 
+  separate_longer_delim(c(Description, geneID), delim = "/")
+
+# Write csv 
+write.csv(funs.simp.edge, "results/funs.simp_edges.csv", row.names = FALSE)
+```
+
+
+
+#### Cellular component
+
+
+```{r}
+ego <- enrichGO(up$gene, 
+             OrgDb = org.Hs.eg.db,
+             ont = "CC", 
+             keyType = "SYMBOL",
+             pvalueCutoff = 0.05)
+```
+
+All functions:
+
+```{r}
+# All functions
+cc.complete <- ego@result %>% 
+  as.data.frame %>% 
+  select(Description, GeneRatio, geneID)
+DT::datatable(funs, options = list(ordering = FALSE), filter = "top")
+```
+
+
+```{r}
+# Write csv 
+write.csv(cc.complete, "results/cc.complete.csv", row.names = FALSE)
+
+
+# Write table for edges 
+
+cc.complete.edge <- cc.complete %>% 
+  dplyr::select(Description, geneID) %>% 
+  separate_longer_delim(c(Description, geneID), delim = "/")
+
+# Write csv 
+write.csv(cc.complete.edge, "results/cc.complete_edges.csv", row.names = FALSE)
+```
+
+Simplified:
+
+```{r}
+ego.simp <- clusterProfiler::simplify(ego, cutoff = 0.7)
+cc.simp <- ego.simp@result %>% 
+  as.data.frame %>% 
+  select(Description, GeneRatio, geneID) 
+DT::datatable(cc.simp, options = list(ordering = FALSE))
+```
+
+
+```{r}
+# Export simplified cc table 
+write.csv(cc.simp, 
+          "results/cc.simp.csv")
+
+# Write edges table 
+cc.simp.edge <- cc.simp %>% 
+  dplyr::select(Description, geneID) %>% 
+  separate_longer_delim(c(Description, geneID), delim = "/")
+
+# Write csv 
+write.csv(cc.simp.edge, "results/cc.simp_edges.csv", row.names = FALSE)
+```
+
+
+
+
+# Reproducibility 
+
+This document was last rendered on: `r Sys.time()`.
+
+<details>
+  <summary>**Session Info**</summary>
+  
+```{r}
+sessionInfo()
+```
+
+</details>
