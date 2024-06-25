@@ -38,6 +38,7 @@ Dessa forma, este estudo busca construir redes regulatórias e funcionais a part
 1. Quais são os genes diferencialmente expressos entre doença e controles?
 2. Quais funções biológicas estão mais representadas na doença? (→redes funcionais)
 3. Como esses genes estão sendo regulados? (→redes de regulação)
+4. Quais são os genes mais importantes na rede para DCF IIb e como eles estão relacionados com a mudança na expressão gênica entre os dois grupos
 
 # Metodologia
 
@@ -45,15 +46,20 @@ Para a realização deste trabalho, seguimos o seguinte fluxo:
 
 > ![Fluxo de trabalho](assets/images/flow.png)
 
-Para analisar a expressão gênica diferencial, utilizamos métodos estatísticos do DESeq2. Esta ferramenta permite modelar a contagem de leituras usando uma distribuição negativa binomial e realiza testes de hipótese para determinar genes com expressão significativamente diferente entre as condições.
+1. *Get/Tidy Data* (Coleta/Limpeza dos dados): Nessa primeira fase, coletamos os dados da nossa base de dados (*Transcriptomes distinguish human FCD subtypes*) e reorganizamos os metadados. Além disso, também trocamos o atributo ENSEMBL do gene para SYMBOL.  
 
-Com os genes diferencialmente expressos identificados, criamos uma rede de interações. Esta rede permite visualizar e analisar as relações entre os genes, bem como suas funções biológicas associadas. Ao integrar a rede com informações de anotação funcional, do *Gene Ontology*, foi possível relacionar os genes com as suas respectivas funções biológicas e vias de sinalização que estão envolvidas, resultando em uma **análise de enriquecimento funcional**.
+2. *Calculate Sample Distances/Distance Heatmap* (Calcular as distâncias entre as amostras / Mapa de Calor das Distâncias): Utilizamos funções R para calcular as distâncias entre as amostras (Figura Vulcano Plot) e gerar o *Heatmap* dos genes (Figura Heatmap). 
 
-Utilizamos a Correlação de Pearson nos genes diferencialmente expressos, para criar relações (arestas) entre genes, e filtramos as aretas em que a correlação é maior (p \< 0.05 e statistic \> 0.85).
+> ![Vulcano Plot](assets/images/vulcano_plot.svg)
+> ![Heatmap](assets/images/heatmap.png)
 
-Além disso, também fizemos outra análise de enriquecimento que foi em relação aos componentes celulares ligados aos genes calculados na rede de genes diferencialmente expressos.
+3. *Run Differential Expression Analysis* (Rodar Análise de Expressão Diferencial): Para analisar a expressão gênica diferencial, utilizamos métodos estatísticos do DESeq2. Esta ferramenta permite modelar a contagem de leituras usando uma distribuição negativa binomial e realiza testes de hipótese para determinar genes com expressão significativamente diferente entre as condições. Assim, conseguimos obter os genes diferencialmente expressos. 
 
-A partir destas redes geradas, fizemos integrações entre elas: gene-função biológica; gene-componente celular; e, por fim, a rede com todos os esses nós, com uma visão geral das interações. As redes, assim como grande parte das análises, foram todas geradas no Cytoscape.
+4. *Gene Set Enrichment Analysis/ Function-Gene Network / CellularComponent-Gene Network* (Análise de Enriquecimento dos Genes / Rede Função-Gene / Rede ComponenteCelular-Gene): Com os genes diferencialmente expressos identificados, criamos duas redes de interações intermediárias: Gene -> Funções Biológicas e Gene -> Componente Celular. Para isso utilizamos uma função do R para fazer um teste hipergeométrico que relacionou as funções biológicas e componentes celulares aos genes, através das informações de anotação funcional do *Gene Ontology*, resultando em uma **análise de enriquecimento funcional**. 
+
+5. *Gene-Gene Correlation Network* (Rede de correlação Gene-Gene): Utilizamos a Correlação de Pearson nos genes diferencialmente expressos para criar relações (arestas) entre genes e filtramos as arestas em que a correlação é maior (p \< 0.05 e statistic \> 0.85). Criando uma terceira rede intermediária: Gene -> Gene. 
+
+6. *Final Network* (Rede Final): Integramos as três redes: Gene-FunçãoBiológica; Gene-ComponenteCelular; e, por fim, a rede com todos os esses nós, com uma visão geral das interações. As redes, assim como grande parte das análises, foram todas geradas no Cytoscape.
 
 Utilizando outras técnicas de ciência de redes, exploramos ainda mais a organização e a dinâmica dos genes na rede. A **análise de centralidade** possibilitou a identificação de genes centrais (“hubs”) que desempenham papéis importantes no funcionamento da epilepsia, sendo potenciais alvos para tratamento. A **detecção de comunidades** revelou grupos de genes que interagem entre si de forma mais intensa que com outros, identificando módulos desregulados que podem estar associados à epilepsia e fornecendo informações sobre as funções biológicas destes módulos. Além disso, a **análise de perturbação e robustez** e a **predição de links** também foram realizadas nas redes geradas, mas as informações obtidas nessas análises não foram suficientes para obtermos conclusões biológicas. As análises detalhadas dessas técnicas podem ser vistas na seção de Análises Realizadas e Discussão.
 
