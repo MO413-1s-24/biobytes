@@ -50,7 +50,7 @@ Para a realização deste trabalho, seguimos o seguinte fluxo:
 
 2. *Calculate Sample Distances/Distance Heatmap* (Calcular as distâncias entre as amostras / Mapa de Calor das Distâncias): Utilizamos funções R para calcular as distâncias entre as amostras (Figura Vulcano Plot) e gerar o *Heatmap* dos genes (Figura Heatmap). 
 
-> ![Vulcano Plot](assets/images/vulcano_plot.svg)
+> ![Vulcano Plot](assets/images/vulcano.png)
 > ![Heatmap](assets/images/heatmap.png)
 
 3. *Run Differential Expression Analysis* (Rodar Análise de Expressão Diferencial): Para analisar a expressão gênica diferencial, utilizamos métodos estatísticos do DESeq2. Esta ferramenta permite modelar a contagem de leituras usando uma distribuição negativa binomial e realiza testes de hipótese para determinar genes com expressão significativamente diferente entre as condições. Assim, conseguimos obter os genes diferencialmente expressos. 
