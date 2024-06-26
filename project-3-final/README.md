@@ -215,7 +215,7 @@ Os genes de maior grau das 4 comunidades principais foram:
 > LTF | 16 | rosa escuro
 > F2RL1 | 14 | verde
 
-A quarta comunidade mais importante (rosa escuro) não apresentou nenhum componentes. Logo, os componentes de maior grau das comunidades principais foram:
+A quarta comunidade mais importante (rosa escuro) não apresentou nenhum componente. Logo, os componentes de maior grau das comunidades principais foram:
 
 > Componente mais importante | Grau | Communidade
 > ----- | ----- | -----
@@ -248,7 +248,7 @@ As funções de maior grau das 4 comunidades principais foram:
 > taxis | 18 | cinza
 
 
-A quarta comunidade mais importante (rosa escuro) não apresentou nenhum componentes. Logo, os componentes de maior grau das comunidades principais foram:
+A quarta comunidade mais importante (rosa escuro) não apresentou nenhum componente. Logo, os componentes de maior grau das comunidades principais foram:
 
 > Componente mais importante | Grau | Communidade
 > ----- | ----- | -----
@@ -306,11 +306,15 @@ Os canais de íons dependentes de voltagem, como os canais de cálcio, sódio e 
 Assim como o processo descrito no parágrafo anterior, a sinalização, adesão e migração celular são funções biológicas que estão atuando de forma diferencial em pacientes com DCF do tipo IIB, pois durante o processo de embriogênese a orientação celular se dá de forma desordenada com uma consequente perda da laminação cortical [31]. Além disso, os achados patológicos desses pacientes apresentam células morfologicamente anormais (neurônios dismórficos e células balões). 
 
 ## Fold Change versus Grau do Nó
-Outra questão que gostaríamos de responder foi se haveria relação entre o Fold Change (log2FC), isto é, qual a mudança de expressão entre os pacientes com DCF IIb e os controles. Para isso, organizamos a rede de forma a permitir a visualização simultânea do grau dos nós e de seu log2FC. 
+Outra questão que gostaríamos de responder foi se haveria relação entre o Fold Change (log2FC), isto é, qual a mudança de expressão entre os pacientes com DCF IIb e os controles. Para isso, organizamos a rede Gene-Gene de forma a permitir a visualização simultânea do grau dos nós e de seu log2FC. 
 
-O nó com maior log2FC também possuía grau pequeno, o que nos levou a hipótese de que nós com maior log2FC também possuíam menor grau. Afinal, se um gene tem um grau muito alto, ele tem o potencial de afetar muitos outros genes, e consequentemente, muitos outros processos biológicos. Dessa forma, se tal gene também tivesse uma mudança de expressão muito significativa entre os grupos doente e controle, a probabilidade de um cenário desastroso também é maior.. Considerando que a DCF é um processo que ocorre durante o período de embriogênese, caso isso acontecesse, esse feto poderia ser abortado. 
+O nó com maior log2FC também possuía grau pequeno (como destacado na Figura Log2FC Gene), o que nos levou a hipótese de que nós com maior log2FC também possuíam menor grau. Afinal, se um gene tem um grau muito alto, ele tem o potencial de afetar muitos outros genes, e consequentemente, muitos outros processos biológicos. Dessa forma, se tal gene também tivesse uma mudança de expressão muito significativa entre os grupos doente e controle, a probabilidade de um cenário desastroso também é maior. Considerando que a DCF é um processo que ocorre durante o período de embriogênese, caso isso acontecesse, esse feto poderia ser abortado. 
 
-Entretanto, a correlação entre o grau do nó e o log2FC é praticamente inexistente (R ~ 0.02). Dado que existem estudos que encontraram essa correlação [32], pode ser que ela exista em casos extremos/muito específicos. 
+> ![Log2FC Gene](assets/images/rede_logfc.png)
+
+Entretanto, a correlação entre o grau do nó e o log2FC é praticamente inexistente (R ~ 0.02), como demonstrado no gráfico da Figura a seguir. Dado que existem estudos que encontraram essa correlação [32], pode ser que ela exista em casos extremos/muito específicos. 
+
+> ![Rede Gene-Gene: Grau x Log2FC](assets/images/degree_logfc.png)
 
 
 # Conclusão
