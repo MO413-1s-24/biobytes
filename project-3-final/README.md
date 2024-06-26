@@ -102,6 +102,9 @@ As redes geradas estão demonstradas a seguir:
 ### Rede Integrada Geral
 > ![Rede integrada geral](assets/images/rede_geral.png)
 
+Os componentes celulares estão representados por losângulos, os genes por retângulos, e as funções biológicas por elipses:
+> ![Formas dos Nós da Rede](assets/images/nodes.png)
+
 Abaixo, temos as tabelas com a contagem de nós de cada tipo de nó e aresta nas redes geradas.
 
 > Descrição | Valor
@@ -121,6 +124,12 @@ Além disso, foram calculadas as médias de grau dos nós de cada tipo de nó, d
 > Média de grau dos nós de tipo Função Biológica | 8.08
 > Média de grau dos nós de tipo Componente Celular | 10.00
 
+Utilizando o Cytoscape, foram gerados gráficos da distribuição de graus de cada uma das redes:
+
+> ![Distribuição de Graus dos Nós das Redes](assets/images/distribution_degree.png)
+
+Nos gráficos, é possível notar que há mais nós com graus entre 0 e 10, porém há também uma quantidade significativa de nós com grau maior que 40. Adicionar os componentes celulares e funções biológicas nas redes aumentou os graus de forma geral, porém houve um aumento maior nos nós de graus baixos, o que é esperado, já que esses nós tem relações apenas genes. 
+
 A partir destas redes, as análises feitas nesse trabalho foram: análise de enriquecimento funcional, análise de centralidade, detecção de comunidades, análise de perturbação e robustez e predição de links. As análises de enriquecimento funcional, de centralidade e de detecção de comunidades foram feitas com sucesso, e as análises de predição de links e de perturbação e robustez foram feitas, mas não obtivemos resultados biológicos claros.
 
 Em relação as análises de enriquecimento funcional, foi possível identificar as funções biológicas mais representadas na doença, bem como os componentes celulares mais importantes. A análise de centralidade permitiu identificar os genes mais importantes na rede, que podem ser alvos para tratamento. Abaixo, temos a tabela dos 5 genes com maior grau na rede de genes diferencialmente expressos.
@@ -133,7 +142,7 @@ Em relação as análises de enriquecimento funcional, foi possível identificar
 > FA2H | 72
 > UGT8 | 71
 
-Da mesma forma, obtemos as funções biológicas mais improtantes e os componentes celulares mais importantes, demonstdados nas tabelas a seguir.
+Da mesma forma, obtemos as funções biológicas mais improtantes e os componentes celulares mais importantes, demonstrados nas tabelas a seguir.
 
 > Função mais importante | Grau
 > ----- | -----
@@ -151,9 +160,102 @@ Da mesma forma, obtemos as funções biológicas mais improtantes e os component
 > Membrane raft | 12
 > Membrane microdomain | 12
 
-Também foi realizada a análise de comunidades, que permitiu identificar módulos de genes que interagem entre si de forma mais intensa que com outros. 
+### Análise de Comunidades
 
-> A FAZER: colocar os resultados das análises de comunidade
+Foi realizada a análise de comunidades que permitiu identificar módulos de genes que interagem entre si de forma mais intensa do que com outros. Foram feitas análises em todas as redes, porém a interpretação biológica foi referente apenas a rede final, uma vez que houveram muitos dados a serem analisados. O algoritmo utilizado foi o Leading EigenVector através do Cytoscape. 
+
+1. Rede Gene-Gene
+
+Essa rede gerou 9 comunidades:
+> ![Comunidades da Rede Gene-Gene](assets/images/comm_gene_gene.png)
+
+Os genes de maior grau das 4 comunidades principais foram:
+
+> Gene mais importante | Grau | Communidade
+> ----- | ----- | -----
+> NINJ2 | 72 | verde
+> APBB1IP | 70 | cinza 
+> LTF | 14 | roxa
+> F2RL1 | 14 | rosa
+
+2. Rede Função-Gene
+
+Essa rede gerou 12 comunidades:
+> ![Comunidades da Rede Função-Gene](assets/images/comm_func_gene.png)
+
+Os genes de maior grau das 4 comunidades principais foram:
+
+> Gene mais importante | Grau | Communidade
+> ----- | ----- | -----
+> TREM2 | 79 | rosa
+> FA2H | 72 | cinza 
+> LTF | 20 | rosa escuro
+> F2RL1 | 22 | verde
+
+As funções de maior grau das 4 comunidades principais foram:
+
+> Função mais importante | Grau | Communidade
+> ----- | ----- | -----
+> leukocyte cell-cell adhesion | 15 | rosa
+> central nervous system myelination | 5 | cinza 
+> response to axon injury | 5 | rosa escuro
+> chemotaxis | 18 | verde
+
+3. Rede Componente-Gene
+
+Essa rede gerou 12 comunidades:
+> ![Comunidades da Rede Função-Gene](assets/images/comm_comp_gene.png)
+
+Os genes de maior grau das 4 comunidades principais foram:
+
+> Gene mais importante | Grau | Communidade
+> ----- | ----- | -----
+> TF | 74 | cinza
+> APBB1IP | 71 | rosa 
+> LTF | 16 | rosa escuro
+> F2RL1 | 14 | verde
+
+A quarta comunidade mais importante (rosa escuro) não apresentou nenhum componentes. Logo, os componentes de maior grau das comunidades principais foram:
+
+> Componente mais importante | Grau | Communidade
+> ----- | ----- | -----
+> apical plasma membrane | 15 | cinza
+> membrane raft | 12 | rosa
+> external side of plasma membrane | 15 | verde
+
+
+4. Rede Completa
+
+Essa rede gerou 12 comunidades:
+> ![Comunidades da Rede Função-Gene](assets/images/comm_complete.png)
+
+Os genes de maior grau das 4 comunidades principais foram:
+
+> Gene mais importante | Grau | Communidade
+> ----- | ----- | -----
+> TREM2 | 82 | rosa
+> TF | 74 | verde 
+> LTF | 22 | rosa escuro
+> F2RL1 | 22 | cinza
+
+As funções de maior grau das 4 comunidades principais foram:
+
+> Função mais importante | Grau | Communidade
+> ----- | ----- | -----
+> leukocyte cell-cell adhesion | 15 | rosa
+> axon ensheathment in central nervous system | 5 | verde 
+> organic hydroxy compound transport | 10 | rosa escuro
+> taxis | 18 | cinza
+
+
+A quarta comunidade mais importante (rosa escuro) não apresentou nenhum componentes. Logo, os componentes de maior grau das comunidades principais foram:
+
+> Componente mais importante | Grau | Communidade
+> ----- | ----- | -----
+> membrane microdomain | 12 | rosa
+> apical part of cell | 15 | verde
+> external side of plasma membrane | 15 | cinza
+
 
 ## Evolução do Projeto
 
